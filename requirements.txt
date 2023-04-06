@@ -1,0 +1,10 @@
+asgiref==3.6.0
+backports.zoneinfo==0.2.1
+Django==4.2
+djangorestframework==3.14.0
+greenlet==2.0.2
+pytz==2023.3
+SQLAlchemy==2.0.8
+sqlparse==0.4.3
+typing_extensions==4.5.0
+tzdata==2023.3
