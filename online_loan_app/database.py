@@ -5,8 +5,10 @@ import uuid
 
 from sqlalchemy import create_engine
 
-from logs import logging_service
 from online_loan_app.config import CONFIGURATION
+from online_loan_app.logs import Logger
+
+logger = Logger()
 
 
 def get_mysql_connection(echo=False, username=None, password=None):
@@ -56,8 +58,7 @@ def get_mysql_connectionstring(username=None, password=None):
 
 
 def call_store_procedure_get(proc_name, input_parameter):
-    log_id = str(uuid.uuid4())[:8]
-    logging = logging_service('db_controller', log_id)
+    logger.info('db_controller')
     try:
         engine = get_mysql_connection()
         connection = engine.raw_connection()
@@ -71,7 +72,7 @@ def call_store_procedure_get(proc_name, input_parameter):
         connection.commit()
         return results
     except Exception as e:
-        logging.error('[{}]'.format(e))
+        logger.error('[{}]'.format(e))
         raise Exception('{} Internal Server Error - record template {}'.format(log_id, e))
     finally:
         connection.close()

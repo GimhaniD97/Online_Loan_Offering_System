@@ -2,8 +2,7 @@ from django.urls import path
 
 from online_loan_app import views
 from online_loan_app.customer.customer import create_new_customer, update_customer_details
-from online_loan_app.user.user import create_new_user
-
+from online_loan_app.user.user_controller import create_new_user
 
 urlpatterns = [
     path('login', views.login,name="login"),

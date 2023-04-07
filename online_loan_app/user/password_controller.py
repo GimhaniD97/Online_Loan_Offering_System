@@ -5,12 +5,13 @@ import sys
 import traceback
 import uuid
 
-from logs import logging_service
+from online_loan_app.logs import Logger
+
+logger = Logger()
 
 
 def create_hash_password(user_password):
-    log_id = str(uuid.uuid4())[:8]
-    logging = logging_service('password_controller', log_id)
+    logger.info('password_controller')
     try:
         random_string = secrets.token_hex(8)
         password = user_password
@@ -26,5 +27,5 @@ def create_hash_password(user_password):
         exc_type, exc_obj, exc_tb = sys.exc_info()
         print(e, exc_type, exc_tb.tb_lineno)
         traceback.print_exc()
-        logging.error('[{}]'.format(str(e)))
+        logger.error('[{}]'.format(str(e)))
         raise Exception('Internal Server Error - verify password_' + str(e))
